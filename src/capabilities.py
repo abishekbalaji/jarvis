@@ -18,6 +18,8 @@ import threading
 
 import requests
 
+import paths
+
 # --------------------------------------------------------------------------
 # 1) WEATHER  (Open-Meteo: free, no API key)
 # --------------------------------------------------------------------------
@@ -174,7 +176,7 @@ def read_document(name: str) -> str:
 # --------------------------------------------------------------------------
 # 4) MEMORY  (facts that persist across restarts)
 # --------------------------------------------------------------------------
-_MEMORY_FILE = os.path.join(os.path.dirname(__file__), "jarvis_memory.json")
+_MEMORY_FILE = os.path.join(paths.DATA, "jarvis_memory.json")
 
 
 def get_memories() -> list:
@@ -265,7 +267,7 @@ def set_timer(duration: str, message: str = "") -> str:
 # --------------------------------------------------------------------------
 # 6) NOTES & LISTS  (to-do, shopping, etc. — persists across restarts)
 # --------------------------------------------------------------------------
-_LISTS_FILE = os.path.join(os.path.dirname(__file__), "jarvis_lists.json")
+_LISTS_FILE = os.path.join(paths.DATA, "jarvis_lists.json")
 
 
 def _load_lists() -> dict:

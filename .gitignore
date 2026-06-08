@@ -3,9 +3,8 @@
 credentials.json
 token.json
 
-# --- Personal data ---
-jarvis_memory.json
-jarvis_lists.json
+# --- Runtime data (personal: memory, lists, tokens) ---
+data/
 
 # --- Python environment & caches ---
 venv/

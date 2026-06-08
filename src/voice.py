@@ -14,11 +14,12 @@ The first time it runs, faster-whisper downloads a small model (~140 MB).
 import os
 import glob
 
+import paths
+
 # --- Let Windows find the CUDA DLLs that ship inside the pip nvidia packages.
 # Must happen before faster-whisper/CTranslate2 tries to use the GPU.
 def _enable_cuda_dlls():
-    base = os.path.join(os.path.dirname(__file__), "venv", "Lib",
-                        "site-packages", "nvidia")
+    base = os.path.join(paths.VENV, "Lib", "site-packages", "nvidia")
     bindirs = glob.glob(os.path.join(base, "*", "bin"))
     for bindir in bindirs:
         try:

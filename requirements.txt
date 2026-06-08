@@ -1,0 +1,34 @@
+# Jarvis dependencies. Install with:
+#   venv\Scripts\python.exe -m pip install -r requirements.txt
+
+# Brain
+ollama                      # free local models
+anthropic                   # optional cloud Claude brain
+python-dotenv
+
+# Speech-to-text (ears) + wake word
+faster-whisper
+SpeechRecognition
+PyAudio
+openwakeword
+numpy
+
+# GPU acceleration for Whisper (NVIDIA)
+nvidia-cublas-cu12
+nvidia-cudnn-cu12
+
+# Text-to-speech (voice)
+edge-tts
+pygame
+comtypes                    # offline Windows SAPI fallback
+
+# Capabilities
+requests                    # weather (Open-Meteo)
+ddgs                        # web search / news
+pypdf                       # read PDFs
+python-docx                 # read Word docs
+
+# Email & calendar
+google-api-python-client
+google-auth-oauthlib
+google-auth-httplib2

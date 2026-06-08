@@ -55,7 +55,7 @@ To stop, press **Ctrl+C** in the window.
 
 ## Email & Calendar setup (optional, one-time)
 Gmail and Google Calendar need a free one-time Google sign-in. Full step-by-step
-instructions are in **`GOOGLE_SETUP.md`**. In short:
+instructions are in **`docs/GOOGLE_SETUP.md`**. In short:
 1. Create a Google Cloud project; enable the **Gmail API** + **Calendar API**.
 2. Configure the OAuth consent screen (**External**) and **add your own Gmail as a
    Test user** (skipping this causes an "access blocked" error).
@@ -68,13 +68,13 @@ everything else works normally.
 
 ---
 
-## Settings you can change (top of `jarvis.py`)
+## Settings you can change (top of `src/jarvis.py`)
 - `BRAIN` — `"local"` (free, default) or `"claude"` (smarter, needs an API key in `.env`)
 - `LOCAL_MODEL` — the free model (default `"qwen2.5:7b"` — good at using tools)
 - `INPUT_MODE` — `"wake"` (default), `"push"`, `"text"`, or `"voice"`
 - `WAKE_WORD` — used only in `"voice"` mode (default `"jarvis"`)
-- Wake sensitivity — `THRESHOLD` in `wakeword.py` (raise if it false-triggers, lower if it misses you)
-- Voice — `EDGE_VOICE` in `tts.py` (British options listed there)
+- Wake sensitivity — `THRESHOLD` in `src/wakeword.py` (raise if it false-triggers, lower if it misses you)
+- Voice — `EDGE_VOICE` in `src/tts.py` (British options listed there)
 
 ## Costs
 - Everything here is **free**: Python, the local brain (Ollama/qwen2.5), the
@@ -88,24 +88,37 @@ everything else works normally.
 ---
 
 ## Make it yours
-- **Personality:** edit `SYSTEM_PROMPT` in `jarvis.py`.
-- **Voice:** edit `EDGE_VOICE` in `tts.py`.
-- **Basic PC tools:** add a function + schema in `tools.py`.
-- **Smart abilities:** add a function in `capabilities.py`, then register it in
-  `tools.py` (`TOOL_SCHEMAS` + `TOOL_FUNCTIONS`).
+- **Personality:** edit `SYSTEM_PROMPT` in `src/jarvis.py`.
+- **Voice:** edit `EDGE_VOICE` in `src/tts.py`.
+- **Basic PC tools:** add a function + schema in `src/tools.py`.
+- **Smart abilities:** add a function in `src/capabilities.py`, then register it in
+  `src/tools.py` (`TOOL_SCHEMAS` + `TOOL_FUNCTIONS`).
 
-## Project files
-- `jarvis.py` — main brain + the input loops (wake / push / text / voice)
-- `tools.py` — tool definitions + PC control (apps, volume, media, lock…)
-- `capabilities.py` — weather, web answers, file reading, memory, timers, lists, briefing
-- `google_services.py` — Gmail + Google Calendar
-- `voice.py` — microphone + Whisper speech-to-text
-- `wakeword.py` — "Hey Jarvis" detection
-- `tts.py` — the spoken voice
-- `setup_google.py` / `setup-google.bat` — one-time Google sign-in
-- `GOOGLE_SETUP.md` — Gmail/Calendar setup guide
-- `jarvis_memory.json` — what Jarvis remembers about you *(not in git)*
-- `jarvis_lists.json` — your to-do / shopping lists *(not in git)*
+## Project structure
+```
+jarvis/
+├── run-jarvis.bat          # ← double-click to start
+├── setup-google.bat        # ← one-time Google sign-in
+├── requirements.txt
+├── README.md
+├── .env / .env.example     # API key (only for the optional Claude brain)
+├── src/                    # all the Python code
+│   ├── jarvis.py           #   main brain + input loops (wake/push/text/voice)
+│   ├── tools.py            #   tool definitions + PC control
+│   ├── capabilities.py     #   weather, web, files, memory, timers, lists, briefing
+│   ├── google_services.py  #   Gmail + Google Calendar
+│   ├── voice.py            #   microphone + Whisper speech-to-text
+│   ├── wakeword.py         #   "Hey Jarvis" detection
+│   ├── tts.py              #   the spoken voice
+│   ├── paths.py            #   central file locations
+│   └── setup_google.py
+├── docs/
+│   └── GOOGLE_SETUP.md     # Gmail/Calendar setup guide
+├── data/                   # personal data, auto-created (not in git)
+│   ├── jarvis_memory.json  #   what Jarvis remembers about you
+│   └── jarvis_lists.json   #   your to-do / shopping lists
+└── venv/                   # Python environment (not in git)
+```
 
 ## Next upgrades (the roadmap)
 - ✅ **Voice input:** mic + Whisper + "Hey Jarvis" wake word. **Done.**

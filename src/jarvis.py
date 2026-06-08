@@ -26,6 +26,7 @@ try:
 except Exception:
     pass
 
+import paths
 import tools
 import tts
 import capabilities
@@ -75,7 +76,7 @@ SYSTEM_PROMPT = (
     "when the user explicitly asks you to read or summarize a file."
 )
 
-load_dotenv()
+load_dotenv(os.path.join(paths.ROOT, ".env"))
 
 # ---------------------------------------------------------------------------
 # Voice (text-to-speech) lives in tts.py (neural British voice + offline

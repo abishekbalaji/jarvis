@@ -16,9 +16,10 @@ import base64
 import datetime
 from email.mime.text import MIMEText
 
-_HERE = os.path.dirname(__file__)
-_CREDS_FILE = os.path.join(_HERE, "credentials.json")
-_TOKEN_FILE = os.path.join(_HERE, "token.json")
+import paths
+
+_CREDS_FILE = os.path.join(paths.ROOT, "credentials.json")
+_TOKEN_FILE = os.path.join(paths.ROOT, "token.json")
 
 SCOPES = [
     "https://www.googleapis.com/auth/gmail.readonly",

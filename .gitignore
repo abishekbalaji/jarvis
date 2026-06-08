@@ -1,0 +1,23 @@
+# --- Secrets & credentials (NEVER commit these) ---
+.env
+credentials.json
+token.json
+
+# --- Personal data ---
+jarvis_memory.json
+jarvis_lists.json
+
+# --- Python environment & caches ---
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# --- Temp / generated audio ---
+*.mp3
+
+# --- OS / editor cruft ---
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/

@@ -23,6 +23,7 @@ edge-tts (a natural British voice).
   - 🎵 **Music & media** — play/pause/skip whatever's playing, or "play <song>" on YouTube
   - 📝 **Notes & lists** — "add milk to my shopping list", "what's on my to-do list" (saved in `jarvis_lists.json`)
   - 📰 **Daily briefing** — "good morning" / "brief me" → time, local weather, and top headlines in one go
+  - 📧 **Email & calendar** *(needs one-time Google sign-in — see below)* — "any new email?", "what's on my calendar?", "email john@x.com…"
 
 ---
 
@@ -49,6 +50,21 @@ To stop, press **Ctrl+C** in the window.
 - `"push"` — press ENTER, then speak (or type) — the most reliable
 - `"text"` — type only
 - `"voice"` — hands-free using the `WAKE_WORD` via Whisper (least reliable)
+
+---
+
+## Email & Calendar setup (optional, one-time)
+Gmail and Google Calendar need a free one-time Google sign-in. Full step-by-step
+instructions are in **`GOOGLE_SETUP.md`**. In short:
+1. Create a Google Cloud project; enable the **Gmail API** + **Calendar API**.
+2. Configure the OAuth consent screen (**External**) and **add your own Gmail as a
+   Test user** (skipping this causes an "access blocked" error).
+3. Create a **Desktop app** OAuth client, download it as **`credentials.json`**,
+   and place it in the jarvis folder.
+4. Double-click **`setup-google.bat`** and sign in once.
+
+Until this is done, the email/calendar commands simply reply "not set up yet" and
+everything else works normally.
 
 ---
 
@@ -80,17 +96,22 @@ To stop, press **Ctrl+C** in the window.
 
 ## Project files
 - `jarvis.py` — main brain + the input loops (wake / push / text / voice)
-- `tools.py` — basic PC control tools
-- `capabilities.py` — weather, web answers, file reading, memory
+- `tools.py` — tool definitions + PC control (apps, volume, media, lock…)
+- `capabilities.py` — weather, web answers, file reading, memory, timers, lists, briefing
+- `google_services.py` — Gmail + Google Calendar
 - `voice.py` — microphone + Whisper speech-to-text
 - `wakeword.py` — "Hey Jarvis" detection
 - `tts.py` — the spoken voice
-- `jarvis_memory.json` — what Jarvis remembers about you
+- `setup_google.py` / `setup-google.bat` — one-time Google sign-in
+- `GOOGLE_SETUP.md` — Gmail/Calendar setup guide
+- `jarvis_memory.json` — what Jarvis remembers about you *(not in git)*
+- `jarvis_lists.json` — your to-do / shopping lists *(not in git)*
 
 ## Next upgrades (the roadmap)
 - ✅ **Voice input:** mic + Whisper + "Hey Jarvis" wake word. **Done.**
 - ✅ **Capability pack:** live weather, web answers, file reading, memory. **Done.**
 - ✅ **Productivity & media:** timers/reminders, music control, notes/lists, daily briefing. **Done.**
-- **Email & calendar:** read/send email, check calendar (needs Google sign-in — next).
+- ✅ **Email & calendar:** read/send Gmail, check Google Calendar. **Done** (needs one-time Google sign-in).
 - **Smart home:** lights/plugs/thermostat via Home Assistant.
 - **Always-on / proactive:** scheduled morning briefing, "meeting in 5 min" alerts.
+- **Add calendar events** by voice (currently calendar is read-only).
